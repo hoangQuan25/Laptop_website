@@ -39,6 +39,7 @@
     font-size: 16px;
     text-transform: uppercase;
     font-weight: 600;
+    margin-top: 20px;
 }
 
 .products .container .filter .categories ul {
@@ -50,6 +51,11 @@
     margin-top: 20px;
     color: #01031a;
     cursor: pointer;
+}
+
+.products .container .filter .categories ul li:hover {
+    color: #c72c40;
+    font-weight: 600;
 }
 
 .products .container .productbox {

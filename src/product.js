@@ -5,7 +5,7 @@ import './product.css'
 
 const Product = ({ product, setProduct, detail, view, close, setClose, addToCart }) => {
     const filteredProduct = (product) => {
-        const update = Productdetail.filter((p) => p.Cat === product);
+        const update = Productdetail.filter((p) => p.Cat === product || p.Brand === product);
         setProduct(update);
     };
     const AllProducts = () => {
@@ -31,7 +31,7 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                                 <h2>{p.Title}</h2>
                                                 <p>{p.Describe}</p>
                                                 <h3>{p.Price} đ</h3>
-                                                <button>Add to cart</button>
+                                                <button onClick={() => addToCart(p)}>Add to cart</button>
                                             </div>
                                         </div>
                                     )
@@ -54,7 +54,15 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                 <li onClick={() => filteredProduct("Gaming")}>Gaming laptop</li>
                                 <li onClick={() => filteredProduct("Office")}>Office laptop</li>
                                 <li onClick={() => filteredProduct("Highend")}>High quality laptop</li>
+                            </ul>
+                            <h3>Brands</h3>
+                            <ul>
+                                <li onClick={() => filteredProduct("Lenovo")}>Lenovo</li>
+                                <li onClick={() => filteredProduct("Asus")}>Asus</li>
+                                <li onClick={() => filteredProduct("HP")}>HP</li>
                                 <li onClick={() => filteredProduct("Macbook")}>Macbook</li>
+                                <li onClick={() => filteredProduct("Dell")}>Dell</li>
+                                <li onClick={() => filteredProduct("Acer")}>Acer</li> 
                             </ul>
                         </div>
                     </div>

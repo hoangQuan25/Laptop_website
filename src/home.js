@@ -6,7 +6,7 @@ import { BiSolidDiscount } from 'react-icons/bi';
 import Homeproduct from './homeproduct';
 import './home.css';
 
-const Home = ({ detail, view, close, setClose }) => {
+const Home = ({ detail, view, close, setClose, addToCart }) => {
   return (
     <>
       {
@@ -26,7 +26,7 @@ const Home = ({ detail, view, close, setClose }) => {
                         <h2>{p.Title}</h2>
                         <p>{p.Describe}</p>
                         <h3>{p.Price} đ</h3>
-                        <button>Add to cart</button>
+                        <button onClick={() => addToCart(p)}>Add to cart</button>
                       </div>
                     </div>
                   )
@@ -135,7 +135,7 @@ const Home = ({ detail, view, close, setClose }) => {
                 <div className='img_box'>
                   <img src={elm.Img} alt={elm.Title} />
                   <div className='icon'>
-                    <li><AiOutlineShoppingCart /></li>
+                    <li onClick={() => addToCart(elm)}><AiOutlineShoppingCart /></li>
                     <li onClick={() => view(elm)}><AiOutlineEye /></li>
                     <li><AiOutlineHeart /></li>
                   </div>

@@ -26,9 +26,20 @@ const App = () => {
   }
   
   // add to cart 
-  const addToCart = (product) => {
 
+  const addToCart = (product) => {
+    const exist = cart.find((p) => {
+      return p.id === product.id;
+    });
+    
+    if (exist) {
+      alert("This product has already been added to your cart");
+      return;
+    }
+    setCart([...cart, {...product, qty:1}]);
+    alert("Product added successfully!");
   }
+
   return (
     <div>
       <BrowserRouter>

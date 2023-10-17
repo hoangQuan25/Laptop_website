@@ -11,8 +11,10 @@ const Rout = ({ product, setProduct, detail, view, close, setClose, cart, setCar
         <Route path='/' element={<Home
           detail={detail}
           view={view}
+          setProduct={setProduct}
           close={close}
           setClose={setClose}
+          addToCart={addToCart}
         />}
         />
         <Route path='/product' element={<Product

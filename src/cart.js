@@ -1,16 +1,54 @@
 import React from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
-import '/cart.css'
+import './cart.css'
 
 const Cart = ({ cart, setCart }) => {
+    // increase quantity
+    const increase = (product) => {
+        const exist = cart.find((p) => {
+            return p.id === product.id;
+        });
+
+        setCart(cart.map((p) => {
+            return p.id === product.id ? {...exist, qty: exist.qty + 1} : p;
+        }));
+    }
+
+    // decrease quantity
+    const decrease = (product) => {
+        const exist = cart.find((p) => {
+            return p.id === product.id;
+        });
+
+        setCart(cart.map((p) => {
+            return p.id === product.id ? {...exist, qty: exist.qty === 0 ? 0 : exist.qty - 1} : p;
+        }));
+    }
+
+    // remove product from cart
+    const removeProduct = (product) => {
+        const exist = cart.find((p) => {
+            return p.id === product.id;
+        });
+
+        if (exist.qty > 0) {
+            setCart(cart.filter((p) => {
+                return p.id !== product.id;
+            }))
+        }
+    }
+
+    //total price 
+    const  totalPrice = cart.reduce((price, item) => price + item.qty * item.Price, 0);
+
     return (
         <>
-            <div className='container'>
+            <div className='cartContainer'>
                 {cart.length === 0 && 
                     <div className='emptyCart'>
                         <h2 className='empty'>Cart is empty!</h2>
-                        <Link to='/product'>Shop now!</Link>
+                        <Link to='/product' className='emptyCartBtn'>Shop now!</Link>
                     </div>
                 }
                 <div className='content'>
@@ -22,16 +60,31 @@ const Cart = ({ cart, setCart }) => {
                                         <img src={e.Img} alt={e.Title} />
                                     </div>
                                     <div className='detail'>
-                                        <h4>{e.Cat}</h4>
-                                        <h3>{e.Title}</h3>
-                                        <p>{e.Price}</p>
-                                        <button><AiOutlineCloseCircle /></button>
+                                        <div className='info'>
+                                            <h3>{e.Title}</h3>
+                                            <p>Price: {e.Price} đ</p>
+                                            <div className='qty'>
+                                                <button className='increase' onClick={() => increase(e)}>+</button>
+                                                <input type='text' value={e.qty}/>
+                                                <button className='decrease' onClick={() => decrease(e)}>-</button>
+                                            </div>
+                                            <h4 className='total'>Total: {e.Price * e.qty} đ</h4>
+                                        </div>
+                                        <div className='close'>
+                                            <button onClick={() => removeProduct(e)}><AiOutlineCloseCircle /></button>
+                                        </div>
                                     </div>
                                 </div>
                             )
                         })
                     }
                 </div>
+                {
+                    <>
+                        <h2 className='totalPrice'>Total: {totalPrice} đ </h2>
+                        <button className='checkout'>Checkout</button>
+                    </>
+                }
             </div>
         </>
     )

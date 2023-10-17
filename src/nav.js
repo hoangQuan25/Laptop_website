@@ -10,7 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import './nav.css';
 
 const Nav = ({ searchButton }) => {
-    const [search, setSearch] = useState()
+    const [search, setSearch] = useState();
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
 
     return (
@@ -19,7 +19,7 @@ const Nav = ({ searchButton }) => {
                 <div className='icon'>
                     <FaLaptopCode />
                 </div>
-                <p>Miễn phí vận chuyển với đơn hàng trên 10 triệu VNĐ!</p>
+                <p>Free shipping for orders over 10 million VND!</p>
             </div>
             <div className='main_header'>
                 <div className='container'>
@@ -38,7 +38,7 @@ const Nav = ({ searchButton }) => {
                                     <div className='user_icon'>
                                         <MdOutlineAccountCircle />
                                     </div>
-                                    <p>Chào, {user.name}</p>
+                                    <p>Hello, {user.name}</p>
                                 </div>
                             )
                         }
@@ -58,13 +58,13 @@ const Nav = ({ searchButton }) => {
                                 <Link to='/' className='link'>Home</Link>
                             </li>
                             <li>
-                                <Link to='/product' className='link'>Sản phẩm</Link>
+                                <Link to='/product' className='link'>Product</Link>
                             </li>
                             <li>
                                 <Link to='/about' className='link'>About</Link>
                             </li>
                             <li>
-                                <Link to='/contact' className='link'>Liên hệ</Link>
+                                <Link to='/contact' className='link'>Contact</Link>
                             </li>
                         </ul>
                     </div>
