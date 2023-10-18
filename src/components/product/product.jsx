@@ -30,7 +30,6 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                                 <img src={p.Img} alt={p.Title} />
                                             </div>
                                             <div className='detail'>
-                                                <h4>{p.Cat}</h4>
                                                 <h2>{p.Title}</h2>
                                                 <p>{p.Describe}</p>
                                                 <h3>{p.Price} đ</h3>

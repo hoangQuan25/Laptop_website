@@ -11,7 +11,7 @@ const Cart = ({ cart, setCart }) => {
         });
 
         setCart(cart.map((p) => {
-            return p.id === product.id ? {...exist, qty: exist.qty + 1} : p;
+            return p.id === product.id ? { ...exist, qty: exist.qty + 1 } : p;
         }));
     }
 
@@ -22,7 +22,7 @@ const Cart = ({ cart, setCart }) => {
         });
 
         setCart(cart.map((p) => {
-            return p.id === product.id ? {...exist, qty: exist.qty === 0 ? 0 : exist.qty - 1} : p;
+            return p.id === product.id ? { ...exist, qty: exist.qty === 0 ? 0 : exist.qty - 1 } : p;
         }));
     }
 
@@ -40,12 +40,12 @@ const Cart = ({ cart, setCart }) => {
     }
 
     //total price 
-    const  totalPrice = cart.reduce((price, item) => price + item.qty * item.Price, 0);
+    const totalPrice = cart.reduce((price, item) => price + item.qty * item.Price, 0);
 
     return (
         <>
             <div className='cartContainer'>
-                {cart.length === 0 && 
+                {cart.length === 0 &&
                     <div className='emptyCart'>
                         <h2 className='empty'>Cart is empty!</h2>
                         <Link to='/product' className='emptyCartBtn'>Shop now!</Link>
@@ -65,7 +65,7 @@ const Cart = ({ cart, setCart }) => {
                                             <p>Price: {e.Price} đ</p>
                                             <div className='qty'>
                                                 <button className='increase' onClick={() => increase(e)}>+</button>
-                                                <input type='text' value={e.qty}/>
+                                                <input type='text' value={e.qty} />
                                                 <button className='decrease' onClick={() => decrease(e)}>-</button>
                                             </div>
                                             <h4 className='total'>Total: {e.Price * e.qty} đ</h4>
@@ -80,6 +80,7 @@ const Cart = ({ cart, setCart }) => {
                     }
                 </div>
                 {
+                    cart.length > 0 &&
                     <>
                         <h2 className='totalPrice'>Total: {totalPrice} đ </h2>
                         <button className='checkout'>Checkout</button>
