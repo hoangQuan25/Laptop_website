@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { AiOutlineArrowRight, AiOutlineShoppingCart, AiOutlineEye, AiOutlineHeart, AiOutlineCloseCircle } from 'react-icons/ai';
 import { FiTruck, FiDollarSign, FiHeadphones } from 'react-icons/fi';
 import { BiSolidDiscount } from 'react-icons/bi';
-import Homeproduct from './homeproduct';
+import Homeproduct from '../data/homeproduct';
 import './home.css';
 
 const Home = ({ detail, view, close, setClose, addToCart }) => {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './home';
-import Product from './product';
-import Cart from './cart';
+import Home from './components/home/home';
+import Product from './components/product/product';
+import Cart from './components/cart/cart';
+import Contact from './components/contact/contact';
 
 const Rout = ({ product, setProduct, detail, view, close, setClose, cart, setCart, addToCart }) => {
   return (
@@ -28,6 +29,7 @@ const Rout = ({ product, setProduct, detail, view, close, setClose, cart, setCar
         />}
         />
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart} />} />
+        <Route path='/contact' element={<Contact />} />
       </Routes>
     </>
   );

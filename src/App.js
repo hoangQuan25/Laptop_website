@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import Nav from './nav'
-import Footer from './footer';
+import Nav from './components/nav/nav';
+import Footer from './components/footer/footer';
 import { BrowserRouter } from 'react-router-dom'
 import Rout from './rout';
-import Productdetail from './productdetail';
+import Productdetail from './components/data/productdetail';
 
 const App = () => {
   // set add to cart
