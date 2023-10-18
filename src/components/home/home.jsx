@@ -7,6 +7,11 @@ import Homeproduct from '../data/homeproduct';
 import './home.css';
 
 const Home = ({ detail, view, close, setClose, addToCart }) => {
+  const handleShopNowClick = () => {
+    // Save the scroll position in sessionStorage
+    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+  };
+  
   return (
     <>
       {
@@ -154,7 +159,7 @@ const Home = ({ detail, view, close, setClose, addToCart }) => {
             <h4>LATEST TECHNOLOGY!</h4>
             <h3>Macbook Pro 16 M2 2023</h3>
             <p>54290000 đ</p>
-            <Link className='link' to='/product'>Our shop<AiOutlineArrowRight /></Link>
+            <Link className='link' to='/product' onClick={handleShopNowClick}>Our shop<AiOutlineArrowRight /></Link>
           </div>
           <div className='img_box'>
             <img src='./img/slider4.png' alt='Macbook Pro 16 M2 2023' />

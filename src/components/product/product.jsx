@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Productdetail from '../data/productdetail'
 import { AiOutlineShoppingCart, AiOutlineEye, AiOutlineHeart, AiOutlineCloseCircle } from 'react-icons/ai'
 import { useAuth0 } from "@auth0/auth0-react"
 import './product.css'
 
 const Product = ({ product, setProduct, detail, view, close, setClose, addToCart }) => {
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth'});
+    }, []);
+    
     const { loginWithRedirect, isAuthenticated } = useAuth0();
 
     const filteredProduct = (product) => {
@@ -18,6 +22,7 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
     return (
         <>
             {
+                
                 close ?
                     <div className='productDetail'>
                         <div className='container'>
