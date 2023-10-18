@@ -1,14 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Productdetail from '../data/productdetail'
 import { AiOutlineShoppingCart, AiOutlineEye, AiOutlineHeart, AiOutlineCloseCircle } from 'react-icons/ai'
 import { useAuth0 } from "@auth0/auth0-react"
 import './product.css'
 
 const Product = ({ product, setProduct, detail, view, close, setClose, addToCart }) => {
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 6;
+
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = product.slice(indexOfFirstProduct, indexOfLastProduct);
+
     useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth'});
-    }, []);
-    
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [currentPage]);
+
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
     const { loginWithRedirect, isAuthenticated } = useAuth0();
 
     const filteredProduct = (product) => {
@@ -22,7 +33,7 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
     return (
         <>
             {
-                
+
                 close ?
                     <div className='productDetail'>
                         <div className='container'>
@@ -76,7 +87,7 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                     <div className='productbox'>
                         <div className='content'>
                             {
-                                product.map((elm) => {
+                                currentProducts.map((elm) => {
                                     return <>
                                         <div className='box' key={elm.id}>
                                             <div className='img_box'>
@@ -100,6 +111,15 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                     </>
                                 })
                             }
+                        </div>
+                        <div className='pagination'>
+                            <ul>
+                                {Array.from({ length: Math.ceil(product.length / productsPerPage) }, (_, i) => (
+                                    <li key={i + 1} onClick={() => paginate(i + 1)} className={currentPage === i + 1 ? 'active' : ''}>
+                                        {i + 1}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                     </div>
                 </div>

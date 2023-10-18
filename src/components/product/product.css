@@ -146,6 +146,28 @@
     color: #b52437;
 }
 
+.products .container .productbox .pagination {
+    margin: auto 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.products .container .productbox .pagination ul {
+    display: flex;
+    padding: 0;
+}
+
+.products .container .productbox .pagination li {
+    cursor: pointer;
+    list-style: none;
+    border: 1px solid #329eb9;
+    padding: 10px;
+}
+
+.products .container .productbox .pagination li:hover {
+    font-weight: bold;
+}
+
 .productDetail {
     z-index: 1;
     top: 0;
