@@ -38,7 +38,7 @@ const Nav = ({ searchButton }) => {
                                     <div className='user_icon'>
                                         <MdOutlineAccountCircle />
                                     </div>
-                                    <p>Hello, {user.name}</p>
+                                    <p>Hello, {user.Username}</p>
                                 </div>
                             )
                         }
