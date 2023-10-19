@@ -25,4 +25,22 @@ The website in the Vercel link provided in the About section above does not have
 
 Detailed instructions can be found at: https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
+## ローカルにダウンロードして実行する方法
 
+Node.jsがコンピュータにインストールされていることを確認してください。
+
+このリポジトリをコンピュータにクローンした後、クローンしたディレクトリに移動して次のコマンドを入力してください：
+
+`npm install`
+
+`npm start`
+
+localhost:3000でウェブサイトが実行されていることを確認したら、別のターミナルを開いてサーバーディレクトリに移動し、次のコマンドを入力してください：
+
+`node server.js`
+
+## 注意
+
+上記のAboutセクションで提供されたVercelリンクのウェブサイトには、この機能がAuth0アプリケーションを使用しており、ログインリンクがlocalhost:3000に設定されているため、ログイン機能はありません。変更を加えるには、ソースコードを自分のマシンで実行した後、Auth0ダッシュボードを訪れて再構成してください。
+
+詳しい手順はこちらで確認できます: https://auth0.com/blog/complete-guide-to-react-user-authentication/
