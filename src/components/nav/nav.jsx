@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { FaLaptopCode } from 'react-icons/fa';
 import { FiHeart } from 'react-icons/fi';
 import { PiHandbagSimpleBold } from 'react-icons/pi';
 import { MdOutlineAccountCircle } from 'react-icons/md';
@@ -15,12 +14,6 @@ const Nav = ({ searchButton }) => {
 
     return (
         <>
-            <div className='free'>
-                <div className='icon'>
-                    <FaLaptopCode />
-                </div>
-                <p>Free shipping for orders over 10 million VND!</p>
-            </div>
             <div className='main_header'>
                 <div className='container'>
                     <div className='logo'>

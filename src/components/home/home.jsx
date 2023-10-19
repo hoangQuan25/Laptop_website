@@ -98,7 +98,7 @@ const Home = ({ detail, view, close, setClose, addToCart }) => {
             </div>
             <div className='detail'>
               <h3>Freeshipping</h3>
-              <p>for every order more than 10000000 VND</p>
+              <p>for domestic delivery</p>
             </div>
           </div>
           <div className='box'>

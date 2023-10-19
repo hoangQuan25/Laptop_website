@@ -7,26 +7,6 @@
     /* position: fixed; */
 }
 
-.free {
-    padding: 10px 30px;
-    width: 100%;
-    background: #090124;
-    display: flex;
-}
-
-.free .icon {
-    color: #c8d84e;
-    font-size: 22px;
-}
-
-.free p {
-    margin-left: 10px;
-    color:#e7edc1;
-    margin-top: 8px;
-    font-size: 14   px;
-    font-weight: 600;
-}
-
 .logo {
     width: 30%;
     height: auto;

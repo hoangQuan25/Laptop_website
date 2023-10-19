@@ -49,7 +49,7 @@ const Contact = () => {
         };
 
         try {
-            const res = await fetch('https://laptop-website-308d0-default-rtdb.firebaseio.com/Message.json', options);
+            const res = await fetch('http://localhost:3000/messages', options);
 
             if (res.ok) {
                 alert('Your message has been sent');
