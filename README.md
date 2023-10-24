@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a project to build the React frontend for a laptop-selling website, along with a simple Node.js server that connects to a PostgreSQL database.
 
-## Available Scripts
+The instructions in this README.md file have a Japanese section below. Please scroll down if needed.
+(このREADME.mdファイルの説明には下に日本語のセクションがあります。必要な場合はスクロールしてください。)
 
-In the project directory, you can run:
+## How to download and run it locally
 
-### `npm start`
+Ensure that your computer has Node.js installed.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+After cloning this repository to your computer, navigate to the cloned directory and type:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+`npm install`
 
-### `npm test`
+`npm start`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After ensuring that the website is running on localhost:3000, open another terminal and navigate to the server directory, and type:
 
-### `npm run build`
+`node server.js`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Note
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The website in the Vercel link provided in the About section above does not have a login functionality because this feature uses the Auth0 application, and the login link is configured for localhost:3000. To make changes, after running the source code on your machine, visit the Auth0 dashboard to reconfigure.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Detailed instructions can be found at: https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
-### `npm run eject`
+## ローカルにダウンロードして実行する方法
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Node.jsがコンピュータにインストールされていることを確認してください。
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+このリポジトリをコンピュータにクローンした後、クローンしたディレクトリに移動して次のコマンドを入力してください：
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+`npm install`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+`npm start`
 
-## Learn More
+localhost:3000でウェブサイトが実行されていることを確認したら、別のターミナルを開いてサーバーディレクトリに移動し、次のコマンドを入力してください：
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+`node server.js`
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 注意
 
-### Code Splitting
+上記のAboutセクションで提供されたVercelリンクのウェブサイトには、この機能がAuth0アプリケーションを使用しており、ログインリンクがlocalhost:3000に設定されているため、ログイン機能はありません。変更を加えるには、ソースコードを自分のマシンで実行した後、Auth0ダッシュボードを訪れて再構成してください。
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+詳しい手順はこちらで確認できます: https://auth0.com/blog/complete-guide-to-react-user-authentication/
