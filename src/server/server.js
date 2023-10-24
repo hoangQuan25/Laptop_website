@@ -42,6 +42,31 @@ app.post('/messages', (req, res) => {
     res.json({ success: true, message: 'Message received successfully' });
 });
 
+// send bill data to the db
+app.post('/cart', async (req, res) => {
+  try {
+    const { email, cart, totalPrice } = req.body;
+
+    // Insert into 'bill' table
+    const billResult = await pool.query(
+      'INSERT INTO bill (date, email, totalprice) VALUES (NOW(), $1, $2) RETURNING id',
+      [email, totalPrice]
+    );
+
+    const billId = billResult.rows[0].id;
+
+    // Insert into 'bill_detail' table for each product in the cart
+    for (const cartItem of cart) {
+      await pool.query('INSERT INTO bill_detail (bill_id, product_id) VALUES ($1, $2)', [billId, cartItem.id]);
+    }
+
+    res.status(201).json({ message: 'Bill and details added successfully', billId });
+  } catch (error) {
+    console.error('Error adding bill and details:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 
 // connect to database
 const pool = new Pool({
@@ -80,10 +105,10 @@ async function formatDataForProductDetail() {
 
     // Export the formatted data to a file (productdetail.js)
     fs.writeFileSync('../components/data/productdetail.js', `const Productdetail = ${JSON.stringify(formattedData, null, 2)};\n\nexport default Productdetail;`);
-    
+
     // log the changes into a file
     logChange(`Modified product list.\n\n`);
-    
+
 }
 
 // Call the function to format the data and export to productdetail.js

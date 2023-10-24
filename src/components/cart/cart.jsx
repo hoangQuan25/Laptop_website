@@ -1,9 +1,11 @@
 import React from 'react'
 import { AiOutlineCloseCircle } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import { useAuth0 } from "@auth0/auth0-react";
 import './cart.css'
 
 const Cart = ({ cart, setCart }) => {
+    const { isAuthenticated, loginWithRedirect, user } = useAuth0();
     // increase quantity
     const increase = (product) => {
         const exist = cart.find((p) => {
@@ -41,6 +43,35 @@ const Cart = ({ cart, setCart }) => {
 
     //total price 
     const totalPrice = cart.reduce((price, item) => price + item.qty * item.Price, 0);
+
+    // send data to server
+    const handleCheckout = async () => {
+
+        try {
+            const email = user.name;
+
+            const response = await fetch('http://localhost:3000/Cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    // Add any other headers you may need, such as authorization headers
+                },
+                body: JSON.stringify({ email, cart, totalPrice }),
+            });
+
+            if (response.ok) {
+                // Successfully sent data to the server
+                alert('Successfully checked out');
+                // Additional logic if needed, e.g., redirecting to a confirmation page
+            } else {
+                alert('Failed to checkout:', response.statusText);
+                // Handle errors appropriately
+            }
+        } catch (error) {
+            alert('Error during checkout:', error);
+            // Handle errors appropriately
+        }
+    };
 
     return (
         <>
@@ -83,7 +114,9 @@ const Cart = ({ cart, setCart }) => {
                     cart.length > 0 &&
                     <>
                         <h2 className='totalPrice'>Total: {totalPrice} đ </h2>
-                        <button className='checkout'>Checkout</button>
+                        <button className='checkout' onClick={
+                            isAuthenticated ? handleCheckout : () => loginWithRedirect()
+                        }>Checkout</button>
                     </>
                 }
             </div>
