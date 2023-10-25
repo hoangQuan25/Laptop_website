@@ -20,7 +20,8 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
         setCurrentPage(pageNumber);
     };
 
-    const { loginWithRedirect, isAuthenticated } = useAuth0();
+    const { loginWithRedirect, isAuthenticated, user } = useAuth0();
+    const isAdmin = (isAuthenticated && user.name === 'hoangquandz2502@gmail.com');
 
     const filteredProduct = (product) => {
         const update = Productdetail.filter((p) => p.Cat === product || p.Brand === product);
@@ -49,7 +50,9 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                                 <h2>{p.Title}</h2>
                                                 <p>{p.Describe}</p>
                                                 <h3>{p.Price} đ</h3>
-                                                <button onClick={() => addToCart(p)}>Add to cart</button>
+                                                {
+                                                    !isAdmin && <button onClick={() => addToCart(p)}>Add to cart</button>
+                                                }
                                             </div>
                                         </div>
                                     )
@@ -95,7 +98,7 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                                 <div className='icon'>
                                                     {
                                                         isAuthenticated ?
-                                                            <li onClick={() => addToCart(elm)}><AiOutlineShoppingCart /></li>
+                                                            (!isAdmin && <li onClick={() => addToCart(elm)}><AiOutlineShoppingCart /></li>)
                                                             :
                                                             <li onClick={() => loginWithRedirect()}><AiOutlineShoppingCart /></li>
                                                     }

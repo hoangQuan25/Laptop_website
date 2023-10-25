@@ -42,31 +42,6 @@ app.post('/messages', (req, res) => {
     res.json({ success: true, message: 'Message received successfully' });
 });
 
-// send bill data to the db
-app.post('/cart', async (req, res) => {
-  try {
-    const { email, cart, totalPrice } = req.body;
-
-    // Insert into 'bill' table
-    const billResult = await pool.query(
-      'INSERT INTO bill (date, email, totalprice) VALUES (NOW(), $1, $2) RETURNING id',
-      [email, totalPrice]
-    );
-
-    const billId = billResult.rows[0].id;
-
-    // Insert into 'bill_detail' table for each product in the cart
-    for (const cartItem of cart) {
-      await pool.query('INSERT INTO bill_detail (bill_id, product_id) VALUES ($1, $2)', [billId, cartItem.id]);
-    }
-
-    res.status(201).json({ message: 'Bill and details added successfully', billId });
-  } catch (error) {
-    console.error('Error adding bill and details:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
 
 // connect to database
 const pool = new Pool({
@@ -88,6 +63,31 @@ async function fetchLaptopsData() {
         client.release();
     }
 }
+
+// send bill data to the db
+app.post('/cart', async (req, res) => {
+    try {
+      const { email, cart, totalPrice } = req.body;
+  
+      // Insert into 'bill' table
+      const billResult = await pool.query(
+        'INSERT INTO bill (date, email, totalprice) VALUES (NOW(), $1, $2) RETURNING id',
+        [email, totalPrice]
+      );
+  
+      const billId = billResult.rows[0].id;
+  
+      // Insert into 'bill_detail' table for each product in the cart
+      for (const cartItem of cart) {
+        await pool.query('INSERT INTO bill_detail (bill_id, product_id, quantity) VALUES ($1, $2, $3)', [billId, cartItem.id, cartItem.qty]);
+      }
+  
+      res.status(201).json({ message: 'Bill and details added successfully', billId });
+    } catch (error) {
+      console.error('Error adding bill and details:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
 
 // Format the fetched data into the structure used in productdetail.js
 async function formatDataForProductDetail() {
@@ -112,12 +112,13 @@ async function formatDataForProductDetail() {
 }
 
 // Call the function to format the data and export to productdetail.js
-formatDataForProductDetail().then(() => {
-    pool.end();
-}).catch(error => {
-    console.error('Error:', error);
-    pool.end();
-});
+formatDataForProductDetail();
+// then(() => {
+//     pool.end();
+// }).catch(error => {
+//     console.error('Error:', error);
+//     pool.end();
+// });
 
 
 

@@ -11,6 +11,7 @@ import './nav.css';
 const Nav = ({ searchButton }) => {
     const [search, setSearch] = useState();
     const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+    const isAdmin = (isAuthenticated && user.name === 'hoangquandz2502@gmail.com');
 
     return (
         <>
@@ -19,10 +20,12 @@ const Nav = ({ searchButton }) => {
                     <div className='logo'>
                         <img className='logo' src='./img/shoplogo.png' alt='this is my logo' onClick={() => window.location.href = '/'}></img>
                     </div>
-                    <div className='search_box'>
-                        <input type='text' value={search} placeholder='What are you searching for...' autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
-                        <button onClick={() => searchButton(search)}>Search</button>
-                    </div>
+                    {
+                        !isAdmin && <div className='search_box'>
+                            <input type='text' value={search} placeholder='What are you searching for...' autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
+                            <button onClick={() => searchButton(search)}>Search</button>
+                        </div>
+                    }
                     <div className='icon'>
                         {
                             isAuthenticated &&
@@ -31,7 +34,7 @@ const Nav = ({ searchButton }) => {
                                     <div className='user_icon'>
                                         <MdOutlineAccountCircle />
                                     </div>
-                                    <p>Hello, {user.name}</p>
+                                    <p>Hello, {isAdmin ? 'Admin' : user.name}</p>
                                 </div>
                             )
                         }
@@ -46,20 +49,30 @@ const Nav = ({ searchButton }) => {
             <div className='header'>
                 <div className='container'>
                     <div className='nav'>
-                        <ul>
-                            <li>
-                                <Link to='/' className='link'>Home</Link>
-                            </li>
-                            <li>
-                                <Link to='/product' className='link'>Product</Link>
-                            </li>
-                            <li>
-                                <Link to='/about' className='link'>About</Link>
-                            </li>
-                            <li>
-                                <Link to='/contact' className='link'>Contact</Link>
-                            </li>
-                        </ul>
+                        {
+                            !isAdmin ? <ul>
+                                <li>
+                                    <Link to='/' className='link'>Home</Link>
+                                </li>
+                                <li>
+                                    <Link to='/product' className='link'>Product</Link>
+                                </li>
+                                <li>
+                                    <Link to='/about' className='link'>About</Link>
+                                </li>
+                                <li>
+                                    <Link to='/contact' className='link'>Contact</Link>
+                                </li>
+                            </ul>
+                                : <ul>
+                                    <li>
+                                        <Link to='/product' className='link'>Product</Link>
+                                    </li>
+                                    <li>
+                                        <Link to='/admin' className='link'>Admin</Link>
+                                    </li>
+                                </ul>
+                        }
                     </div>
                     <div className='auth'>
                         {

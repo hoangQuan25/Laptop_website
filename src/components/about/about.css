@@ -12,7 +12,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: url('C:/programming/Laptop_website/laptop_website/publicimg/bg.jpg') center/cover no-repeat;
+    background-image: linear-gradient(#0dccac , #0dccac 50%, #fff 50%, #fff);
 }
 
 .about-container .content {
