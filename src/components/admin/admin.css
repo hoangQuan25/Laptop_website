@@ -1,0 +1,17 @@
+/* AdminDashboard.css */
+
+.admin-dashboard {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px;
+  }
+  
+  .dashboard-box {
+    text-align: center;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+  }
+  

@@ -1,0 +1,39 @@
+1. Tester1
+   - Email: tester1@example.com
+   - Password: Abcd123!
+
+2. Tester2
+   - Email: tester2@example.com
+   - Password: P@ssw0rd
+
+3. Tester3
+   - Email: tester3@example.com
+   - Password: SecurePwd456
+
+4. Tester4
+   - Email: tester4@example.com
+   - Password: TestPass!789
+
+5. Tester5
+   - Email: tester5@example.com
+   - Password: RandomPwd$123
+
+6. Tester6
+   - Email: tester6@example.com
+   - Password: LetMeIn789
+
+7. Tester7
+   - Email: tester7@example.com
+   - Password: StrongPwd@456
+
+8. Tester8
+   - Email: tester8@example.com
+   - Password: Pass1234!
+
+9. Tester9
+   - Email: tester9@example.com
+   - Password: SecurePwd!987
+
+10. Tester10
+    - Email: tester10@example.com
+    - Password: SamplePwd123

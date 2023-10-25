@@ -89,6 +89,37 @@ app.post('/cart', async (req, res) => {
     }
   });
 
+
+// add user to the server
+app.post('/', async (req, res) => {
+    try {
+      const { name } = req.body;
+  
+      // Check if the email already exists
+      const checkQuery = 'SELECT * FROM users WHERE user_email = $1';
+      const checkValues = [name];
+      const existingUser = await pool.query(checkQuery, checkValues);
+  
+      if (existingUser.rows.length === 0) {
+        // Only insert the user if the email does not exist
+        // Assuming 'users' is your PostgreSQL table name
+        const insertQuery = 'INSERT INTO users (user_id, user_email) VALUES (DEFAULT, $1) RETURNING *';
+        const insertValues = [name];
+  
+        const result = await pool.query(insertQuery, insertValues);
+  
+        console.log('User added to the database:', result.rows[0]);
+        res.status(201).json({ message: 'User added successfully' });
+      } else {
+        // Do nothing or send a different response if needed
+        res.status(200).json({ message: 'User already exists, did nothing' });
+      }
+    } catch (error) {
+      console.error('Error handling request:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
 // Format the fetched data into the structure used in productdetail.js
 async function formatDataForProductDetail() {
     const laptopsData = await fetchLaptopsData();

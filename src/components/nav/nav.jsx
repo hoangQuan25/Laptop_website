@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FiHeart } from 'react-icons/fi';
 import { PiHandbagSimpleBold } from 'react-icons/pi';
 import { MdOutlineAccountCircle } from 'react-icons/md';
@@ -10,8 +10,44 @@ import './nav.css';
 
 const Nav = ({ searchButton }) => {
     const [search, setSearch] = useState();
-    const { loginWithRedirect, logout, user, isAuthenticated } = useAuth0();
+    const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
     const isAdmin = (isAuthenticated && user.name === 'hoangquandz2502@gmail.com');
+
+    useEffect(() => {
+        const sendDataToServer = async () => {
+            try {
+                // Wait for the authentication process to complete
+                const token = await getAccessTokenSilently();
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ name: user.name })
+                };
+
+                await sendData(options);
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        if (isAuthenticated) {
+            sendDataToServer();
+        }
+    }, [isAuthenticated, user, getAccessTokenSilently]);
+
+
+    const sendData = async (options) => {
+        try {
+            const res = await fetch('http://localhost:3000', options);
+            console.log('Server response:', res);
+        } catch (e) {
+            console.error(e);
+        }
+    };
+
 
     return (
         <>
@@ -39,10 +75,12 @@ const Nav = ({ searchButton }) => {
                             )
                         }
 
-                        <div className='second_icon'>
-                            <Link to='/' className='link'><FiHeart /></Link>
-                            <Link to='/Cart' className='link'><PiHandbagSimpleBold /></Link>
-                        </div>
+                        {
+                            !isAdmin && <div className='second_icon'>
+                                <Link to='/' className='link'><FiHeart /></Link>
+                                <Link to='/Cart' className='link'><PiHandbagSimpleBold /></Link>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
