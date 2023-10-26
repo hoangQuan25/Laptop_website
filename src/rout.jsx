@@ -34,7 +34,7 @@ const Rout = ({ product, setProduct, detail, view, close, setClose, cart, setCar
         <Route path='/cart' element={<Cart cart={cart} setCart={setCart} />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/about'  element={<About />} />
-        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin' element={<Admin detail={detail} view={view} close={close} setClose={setClose} />} />
       </Routes>
     </>
   );

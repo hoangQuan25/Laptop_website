@@ -122,11 +122,17 @@ app.get('/admin', async (req, res) => {
     // Query for the number of products in laptops
     const productsResult = await pool.query('SELECT COUNT(*) AS num_of_products FROM laptops');
 
+    // Fetch recent messages
+    const messagesQuery = 'SELECT * FROM contact ORDER BY date DESC LIMIT 3;';
+    const messagesResult = await pool.query(messagesQuery);
+    const recentMessages = messagesResult.rows;
+
     // Send the results as JSON
     res.json({
       total_users: usersResult.rows[0].total_users,
       total_revenue: revenueResult.rows[0].total_revenue || 0, // Ensure a default value if there is no revenue
       num_of_products: productsResult.rows[0].num_of_products,
+      recentMessages
     });
   } catch (error) {
     console.error('Error fetching stats:', error);

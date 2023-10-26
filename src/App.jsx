@@ -20,8 +20,8 @@ const App = () => {
     setProduct(change);
   }
   // view product detail
-  const view = (product) => {
-    setDetail([{ ...product }]);
+  const view = (content) => {
+    setDetail([{ ...content }]);
     setClose(true); 
   }
   

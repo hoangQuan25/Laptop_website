@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { AiOutlineShoppingCart, AiOutlineUserAdd } from 'react-icons/ai'
+import { AiOutlineShoppingCart, AiOutlineUserAdd, AiOutlineCloseCircle } from 'react-icons/ai'
 import { BsCoin } from 'react-icons/bs'
 import './admin.css';
 
@@ -16,10 +16,11 @@ const DashboardBox = ({ title, value, icon }) => {
   );
 };
 
-const Admin = () => {
+const Admin = ({ detail, view, close, setClose }) => {
   const [products, setProducts] = useState(0);
   const [customers, setCustomers] = useState(0);
   const [revenue, setRevenue] = useState(0);
+  const [recentMessages, setRecentMessages] = useState([]);
 
   useEffect(() => {
     // Fetch data from the server
@@ -29,11 +30,25 @@ const Admin = () => {
         setProducts(response.data.num_of_products);
         setCustomers(response.data.total_users);
         setRevenue(response.data.total_revenue);
+
+        const formattedMessages = response.data.recentMessages.map(message => ({
+          ...message,
+          date: formatDateString(message.date),
+        }));
+
+        setRecentMessages(formattedMessages);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }, []); // Empty dependency array ensures the effect runs only once
+
+  // helper function to format dates
+  const formatDateString = (dateString) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', options).replace(',', ' ');
+  };
 
   // handle the add product
   const [product, setProduct] = useState(
@@ -113,6 +128,40 @@ const Admin = () => {
         </div>
         <div className="messages-section">
           <h2>Recent messages</h2>
+          {
+            close ?
+            <div className='message-detail'>
+                <div className='container'>
+                    <button onClick={() => setClose(false)} className='closebtn'><AiOutlineCloseCircle /></button>
+                    {
+                        detail.map((p) => {
+                            return (
+                                <div className='message-box'>
+                                    <div className='detail'>
+                                        <p>At: {p.date}</p>
+                                        <h2>From: {p.name}</h2>
+                                        <p>{p.email}</p>
+                                        <h3>{p.subject}</h3>
+                                        <p>{p.message}</p>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+            </div>
+            : null
+          }
+          {recentMessages.map((message, index) => (
+            <div key={index} className="message-block" onClick={() => view(message)}>
+              <p><strong>From:</strong> {message.name}</p>
+              <p><strong>Email:</strong> {message.email}</p>
+              <p><strong>Subject:</strong> {message.subject}</p>
+            </div>
+          ))}
+        </div>
+        <div className='bill-section'>
+          <h2>New orders</h2>
           <div className="content"></div>
         </div>
       </div>
