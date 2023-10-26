@@ -22,6 +22,7 @@ const Admin = ({ detail, view, close, setClose }) => {
   const [revenue, setRevenue] = useState(0);
   const [recentMessages, setRecentMessages] = useState([]);
 
+
   useEffect(() => {
     // Fetch data from the server
     axios.get('/admin')
@@ -53,6 +54,7 @@ const Admin = ({ detail, view, close, setClose }) => {
   // handle the add product
   const [product, setProduct] = useState(
     {
+      id: '',
       Title: '',
       Cat: '',
       Brand: '',
@@ -79,14 +81,14 @@ const Admin = ({ detail, view, close, setClose }) => {
     }
 
     // If all checks pass, proceed with sending data
-    const { Title, Cat, Brand, Price, Img, Describe } = product;
+    const { id, Title, Cat, Brand, Price, Img, Describe, Available } = product;
     const options = {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
       body: JSON.stringify({
-        Title, Cat, Brand, Price, Img, Describe
+        id, Title, Cat, Brand, Price, Img, Describe, Available
       })
     };
 
@@ -117,11 +119,13 @@ const Admin = ({ detail, view, close, setClose }) => {
         <div className="form-section">
           <h2>Add product</h2>
           <form method='POST'>
+            <input type='text' name='id' value={product.id} placeholder='Id' required autoComplete='off' onChange={data} />
             <input type='text' name='Title' value={product.Title} placeholder='Title' required autoComplete='off' onChange={data} />
             <input type='text' name='Cat' value={product.Cat} placeholder='Cat' required autoComplete='off' onChange={data} />
             <input type='text' name='Brand' value={product.Brand} placeholder='Brand' required autoComplete='off' onChange={data} />
             <input type='text' name='Price' value={product.Price} placeholder='Price' required autoComplete='off' onChange={data} />
             <input type='text' name='Img' value={product.Img} placeholder='Img link' required autoComplete='off' onChange={data} />
+            <input type='text' name='Available' value={product.Available} placeholder='Quantity available' required autoComplete='off' onChange={data} />
             <textarea name='Describe' value={product.Describe} placeholder='Describe' required autoComplete='off' onChange={data} />
             <button type='submit' onClick={sendData}>Add product</button>
           </form>
@@ -130,27 +134,27 @@ const Admin = ({ detail, view, close, setClose }) => {
           <h2>Recent messages</h2>
           {
             close ?
-            <div className='message-detail'>
+              <div className='message-detail'>
                 <div className='container'>
-                    <button onClick={() => setClose(false)} className='closebtn'><AiOutlineCloseCircle /></button>
-                    {
-                        detail.map((p) => {
-                            return (
-                                <div className='message-box'>
-                                    <div className='detail'>
-                                        <p>At: {p.date}</p>
-                                        <h2>From: {p.name}</h2>
-                                        <p>{p.email}</p>
-                                        <h3>{p.subject}</h3>
-                                        <p>{p.message}</p>
-                                    </div>
-                                </div>
-                            )
-                        })
-                    }
+                  <button onClick={() => setClose(false)} className='closebtn'><AiOutlineCloseCircle /></button>
+                  {
+                    detail.map((p) => {
+                      return (
+                        <div className='message-box'>
+                          <div className='detail'>
+                            <p>At: {p.date}</p>
+                            <h2>From: {p.name}</h2>
+                            <p>{p.email}</p>
+                            <h3>{p.subject}</h3>
+                            <p>{p.message}</p>
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
                 </div>
-            </div>
-            : null
+              </div>
+              : null
           }
           {recentMessages.map((message, index) => (
             <div key={index} className="message-block" onClick={() => view(message)}>
@@ -159,10 +163,6 @@ const Admin = ({ detail, view, close, setClose }) => {
               <p><strong>Subject:</strong> {message.subject}</p>
             </div>
           ))}
-        </div>
-        <div className='bill-section'>
-          <h2>New orders</h2>
-          <div className="content"></div>
         </div>
       </div>
     </>

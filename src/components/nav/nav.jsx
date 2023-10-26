@@ -109,6 +109,9 @@ const Nav = ({ searchButton }) => {
                                     <li>
                                         <Link to='/admin' className='link'>Admin</Link>
                                     </li>
+                                    <li>
+                                        <Link to='/checkBill' className='link'>Orders</Link> 
+                                    </li>
                                 </ul>
                         }
                     </div>

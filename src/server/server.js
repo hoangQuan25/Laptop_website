@@ -123,9 +123,10 @@ app.get('/admin', async (req, res) => {
     const productsResult = await pool.query('SELECT COUNT(*) AS num_of_products FROM laptops');
 
     // Fetch recent messages
-    const messagesQuery = 'SELECT * FROM contact ORDER BY date DESC LIMIT 3;';
+    const messagesQuery = 'SELECT * FROM contact ORDER BY date DESC LIMIT 4;';
     const messagesResult = await pool.query(messagesQuery);
     const recentMessages = messagesResult.rows;
+
 
     // Send the results as JSON
     res.json({
@@ -137,6 +138,83 @@ app.get('/admin', async (req, res) => {
   } catch (error) {
     console.error('Error fetching stats:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+// get the bill data from server
+app.get('/checkBill', async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      `
+      SELECT
+        b.id,
+        b.date,
+        b.email,
+        b.totalprice,
+        bd.product_id,
+        bd.quantity
+      FROM
+        bill b
+      JOIN
+        (
+          SELECT id
+          FROM bill
+          ORDER BY date DESC
+          LIMIT 4
+        ) latest_bills ON b.id = latest_bills.id
+      JOIN
+        bill_detail bd ON b.id = bd.bill_id
+      ORDER BY
+        b.date DESC;
+      `
+    );
+
+    const groupedBillData = new Map();
+
+    rows.forEach(row => {
+      const existingBill = groupedBillData.get(row.id);
+
+      if (existingBill) {
+        // Bill already exists, add details to it
+        existingBill.billDetails.push({ productId: row.product_id, quantity: row.quantity });
+      } else {
+        // Bill does not exist, create a new entry
+        groupedBillData.set(row.id, {
+          id: row.id,
+          date: row.date,
+          email: row.email,
+          totalprice: row.totalprice,
+          billDetails: [{ productId: row.product_id, quantity: row.quantity }],
+        });
+      }
+    });
+
+    res.json({
+      groupedBillData: [...groupedBillData.values()]
+    })
+  } catch (error) {
+    console.error('Error fetching bill data:', error);
+  }
+});
+
+// add product to db
+app.post('/admin', async (req, res) => {
+  const { id, Title, Cat, Brand, Price, Img, Describe, Available } = req.body;
+
+  try {
+    const result = await pool.query(
+      'INSERT INTO laptops (id, title, category, brand, price, image_url, description, available) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *',
+      [id, Title, Cat, Brand, Price, Img, Describe, Available]
+    );
+
+    // Assuming that the 'laptops' table has columns (title, category, brand, price, image, description)
+    const insertedProduct = result.rows[0];
+
+    console.log('Product added successfully:', insertedProduct);
+    res.status(201).json({ message: 'Product added successfully', product: insertedProduct });
+  } catch (error) {
+    console.error('Error adding product to the database:', error);
+    res.status(500).json({ message: 'An error occurred' });
   }
 });
 // Format the fetched data into the structure used in productdetail.js

@@ -142,6 +142,15 @@ const Productdetail = [
     "Price": 24790000,
     "Img": "./img/id12.png",
     "Describe": "The HP Pavilion x360 14 (2021) is a convertible laptop with a 360-degree hinge that is available in a variety of different configurations. Its plastic chassis feels solid and decently built, and since it is lightweight and compact, it is easy to bring along with you. The user experience is decent overall thanks to its smooth touchpad, good-sized keyboard, and decently loud, neutral-sounding speakers. The port selection is great, including a dedicated HDMI port and a single USB-C port that supports USB Power Delivery and display out."
+  },
+  {
+    "id": 17,
+    "Title": "HP 240 G8 i5-1135G7",
+    "Cat": "Office",
+    "Brand": "HP",
+    "Price": 11900000,
+    "Img": "./img/id17.jpg",
+    "Describe": "Upgrade your computing experience with the HP 240 G8, a powerhouse of performance and reliability. Engineered with the Intel Core i5-1135G7 processor, this laptop takes productivity to new heights. From swift multitasking to resource-demanding tasks, the i5-1135G7 ensures a responsive and efficient computing experience."
   }
 ];
 
