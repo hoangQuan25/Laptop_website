@@ -44,27 +44,30 @@ const Cart = ({ cart, setCart }) => {
     //total price 
     const totalPrice = cart.reduce((price, item) => price + item.qty * item.Price, 0);
 
+    /* eslint-env browser */
     // send data to server
     const handleCheckout = async () => {
 
         try {
             const email = user.name;
 
-            const response = await fetch('http://localhost:3000/Cart', {
+            const response = await fetch('http://localhost:3000/cart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     // Add any other headers you may need, such as authorization headers
                 },
                 body: JSON.stringify({ email, cart, totalPrice }),
-            });
+            })
+            .then((res) => res.json())
+            .then((url) => window.location.href = url);
 
             if (response.ok) {
                 // Successfully sent data to the server
-                alert('Successfully checked out');
+                console.log('Successfully checked out');
                 // Additional logic if needed, e.g., redirecting to a confirmation page
             } else {
-                alert('Failed to checkout:', response.statusText);
+                console.log('Failed to checkout:', response.statusText);
                 // Handle errors appropriately
             }
         } catch (error) {

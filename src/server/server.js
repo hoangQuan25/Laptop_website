@@ -2,8 +2,12 @@ const express = require('express');
 const { Pool } = require('pg');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const stripe = require('stripe');
+const dotenv = require('dotenv');
+
 const app = express();
 const port = 3001;
+dotenv.config();
 
 // Middleware to parse JSON data
 app.use(bodyParser.json());
@@ -49,6 +53,10 @@ async function fetchLaptopsData() {
   }
 }
 
+// Stripe
+let stripeGateway = stripe(process.env.stripe_api);
+let DOMAIN = process.env.DOMAIN;
+
 // send bill data to the db
 app.post('/cart', async (req, res) => {
   try {
@@ -67,7 +75,33 @@ app.post('/cart', async (req, res) => {
       await pool.query('INSERT INTO bill_detail (bill_id, product_id, quantity) VALUES ($1, $2, $3)', [billId, cartItem.id, cartItem.qty]);
     }
 
-    res.status(201).json({ message: 'Bill and details added successfully', billId });
+    const lineItems = cart.map((item) => {
+      const unitAmount = parseInt(item.Price);
+
+      return {
+        price_data: {
+          currency: 'vnd',
+          product_data: {
+            name: item.Title,
+          },
+          unit_amount: unitAmount,
+        },
+        quantity: item.qty
+      }
+    });
+
+    // console.log('lineItems:', lineItems);
+
+    const session = await stripeGateway.checkout.sessions.create({
+      payment_method_types: ['card'],
+      mode: 'payment',
+      success_url: `${DOMAIN}/success`,
+      cancel_url: `${DOMAIN}/cancel`,
+      line_items: lineItems,
+      billing_address_collection: 'required'
+    });
+
+    res.status(201).json(session.url);
   } catch (error) {
     console.error('Error adding bill and details:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -237,6 +271,7 @@ async function formatDataForProductDetail() {
 
 // Call the function to format the data and export to productdetail.js
 formatDataForProductDetail();
+
 
 // Start the server
 app.listen(port, () => {

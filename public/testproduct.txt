@@ -1,0 +1,49 @@
+id 17
+title HP 240 G8 i5-1135G7
+cat office
+brand HP
+price 11900000
+describe: Upgrade your computing experience with the HP 240 G8, a powerhouse of performance and reliability. Engineered with the Intel Core i5-1135G7 processor, this laptop takes productivity to new heights. From swift multitasking to resource-demanding tasks, the i5-1135G7 ensures a responsive and efficient computing experience.
+
+id 18
+title HP Notebook 255 G7
+cat office
+brand HP
+price 7590000
+describe
+
+id 19
+title HP Gaming VICTUS 16
+cat gaming
+brand HP
+price 23490000
+describe
+
+id 20
+title Acer Aspire 7
+cat gaming
+brand Acer
+price 13990000
+describe
+
+id21
+title Acer Swift X 16
+cat gaming
+brand Acer
+price 23900000
+describe
+
+id22
+title Dell Gaming G3 3500
+cat gaming
+brand Dell
+price 13490000
+describe
+
+id23
+title Dell Latitude 3420
+cat office
+brand Dell
+price 11900000
+describe
+

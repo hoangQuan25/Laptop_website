@@ -7,6 +7,8 @@ import Contact from './components/contact/contact';
 import About from './components/about/about';
 import Admin from './components/admin/admin';
 import CheckBill from './components/admin/checkBill';
+import Success from './components/successCheckout/success';
+import Cancel from './components/cancelCheckout/cancel';
 
 const Rout = ({ product, setProduct, detail, view, close, setClose, cart, setCart, addToCart }) => {
   
@@ -37,6 +39,8 @@ const Rout = ({ product, setProduct, detail, view, close, setClose, cart, setCar
         <Route path='/about'  element={<About />} />
         <Route path='/admin' element={<Admin detail={detail} view={view} close={close} setClose={setClose} />} />
         <Route path='/checkBill' element={<CheckBill detail={detail} view={view} close={close} setClose={setClose} />} />
+        <Route path='/success' element={<Success />} />
+        <Route path='cancel' element={<Cancel />} />
       </Routes>
     </>
   );
