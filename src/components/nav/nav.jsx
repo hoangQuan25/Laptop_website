@@ -11,7 +11,7 @@ import './nav.css';
 const Nav = ({ searchButton }) => {
     const [search, setSearch] = useState();
     const { loginWithRedirect, logout, user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-    const isAdmin = (isAuthenticated && user.name === 'hoangquandz2502@gmail.com');
+    const isAdmin = (isAuthenticated && user.name === 'admin@gmail.com');
 
     useEffect(() => {
         const sendDataToServer = async () => {
@@ -56,12 +56,12 @@ const Nav = ({ searchButton }) => {
                     <div className='logo'>
                         <img className='logo' src='./img/shoplogo.png' alt='this is my logo' onClick={() => window.location.href = '/'}></img>
                     </div>
-                    {
-                        !isAdmin && <div className='search_box'>
-                            <input type='text' value={search} placeholder='What are you searching for...' autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
-                            <button onClick={() => searchButton(search)}>Search</button>
-                        </div>
-                    }
+
+                    <div className='search_box'>
+                        <input type='text' value={search} placeholder='What are you searching for...' autoComplete='off' onChange={(e) => setSearch(e.target.value)} />
+                        <button onClick={() => searchButton(search)}>Search</button>
+                    </div>
+
                     <div className='icon'>
                         {
                             isAuthenticated &&
@@ -107,10 +107,10 @@ const Nav = ({ searchButton }) => {
                                         <Link to='/product' className='link'>Product</Link>
                                     </li>
                                     <li>
-                                        <Link to='/admin' className='link'>Admin</Link>
+                                        <Link to='/admin' className='link'>Dashboard</Link>
                                     </li>
                                     <li>
-                                        <Link to='/checkBill' className='link'>Orders</Link> 
+                                        <Link to='/checkBill' className='link'>Orders</Link>
                                     </li>
                                 </ul>
                         }

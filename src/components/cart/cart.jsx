@@ -44,7 +44,7 @@ const Cart = ({ cart, setCart }) => {
     //total price 
     const totalPrice = cart.reduce((price, item) => price + item.qty * item.Price, 0);
 
-    /* eslint-env browser */
+    
     // send data to server
     const handleCheckout = async () => {
 

@@ -1,6 +1,5 @@
 .bills-section {
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 15px;
     padding: 20px;
     background: #d3eef0;
     border-radius: 5px;
@@ -65,6 +64,64 @@
     padding: 20px 20px;
 }
 
+.bill-detail .container .bill-box .detail {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: relative;
+}
+
+.bill-detail .container .bill-box .detail .buttons {
+    position: absolute;
+    margin-top: 500px;
+    left: 78%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: space-around;
+}
+
+.bill-detail .container .bill-box .detail .buttons button {
+    margin: 40px;
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.bill-detail .container .bill-box .detail .buttons button:hover {
+    color: #fff;
+    transition: 0.5s;
+}
+
+/* Button styles */
+.bill-detail .container .bill-box .detail .buttons button#a {
+    background: #6a6ae4;
+}
+
+.bill-detail .container .bill-box .detail .buttons button#r {
+    background: #f36161;
+}
+
+
 .bill-detail .container .bill-box li {
     list-style: none;
+}
+
+.no-bill {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #d3eef0;
+}
+
+.no-bill .content {
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.no-bill .content h1 {
+    margin-left: 50%;
 }

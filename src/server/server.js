@@ -193,8 +193,8 @@ app.get('/checkBill', async (req, res) => {
         (
           SELECT id
           FROM bill
+          WHERE status IS NULL
           ORDER BY date DESC
-          LIMIT 4
         ) latest_bills ON b.id = latest_bills.id
       JOIN
         bill_detail bd ON b.id = bd.bill_id
@@ -231,6 +231,22 @@ app.get('/checkBill', async (req, res) => {
   }
 });
 
+// Update bill status in the database
+app.post('/approveBill', async (req, res) => {
+  try {
+      const { billId, status } = req.body;
+
+      // Update the status in the 'bill' table
+      await pool.query('UPDATE bill SET status = $1 WHERE id = $2', [status, billId]);
+
+      res.status(200).json({ success: true, message: 'Bill status updated successfully' });
+  } catch (error) {
+      console.error('Error updating bill status:', error);
+      res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+
 // add product to db
 app.post('/admin', async (req, res) => {
   const { id, Title, Cat, Brand, Price, Img, Describe, Available } = req.body;
@@ -263,6 +279,7 @@ async function formatDataForProductDetail() {
     Price: laptop.price,
     Img: laptop.image_url,
     Describe: laptop.description,
+    Available: laptop.available
   }));
 
   // Export the formatted data to a file (productdetail.js)

@@ -21,7 +21,7 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
     };
 
     const { loginWithRedirect, isAuthenticated, user } = useAuth0();
-    const isAdmin = (isAuthenticated && user.name === 'hoangquandz2502@gmail.com');
+    const isAdmin = (isAuthenticated && user.name === 'admin@gmail.com');
 
     const filteredProduct = (product) => {
         const update = Productdetail.filter((p) => p.Cat === product || p.Brand === product);
@@ -50,6 +50,9 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                                 <h2>{p.Title}</h2>
                                                 <p>{p.Describe}</p>
                                                 <h3>{p.Price} đ</h3>
+                                                {
+                                                    isAdmin && <h3>Quantity in stock: {p.Available}</h3>
+                                                }
                                                 {
                                                     !isAdmin && <button onClick={() => addToCart(p)}>Add to cart</button>
                                                 }
@@ -92,7 +95,7 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                             {
                                 currentProducts.map((elm) => {
                                     return <>
-                                        <div className='box' key={elm.id}>
+                                        <div className='box' key={elm.id} onClick={isAdmin ? () => view(elm) : null}>
                                             <div className='img_box'>
                                                 <img src={elm.Img} alt={elm.Title} />
                                                 <div className='icon'>
@@ -102,8 +105,12 @@ const Product = ({ product, setProduct, detail, view, close, setClose, addToCart
                                                             :
                                                             <li onClick={() => loginWithRedirect()}><AiOutlineShoppingCart /></li>
                                                     }
-                                                    <li onClick={() => view(elm)}><AiOutlineEye /></li>
-                                                    <li><AiOutlineHeart /></li>
+                                                    {
+                                                        !isAdmin && <>
+                                                            <li><AiOutlineHeart /></li>
+                                                            <li onClick={() => view(elm)}><AiOutlineEye /></li>
+                                                        </>
+                                                    }
                                                 </div>
                                             </div>
                                             <div className='detail'>
