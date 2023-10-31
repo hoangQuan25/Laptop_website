@@ -234,15 +234,15 @@ app.get('/checkBill', async (req, res) => {
 // Update bill status in the database
 app.post('/approveBill', async (req, res) => {
   try {
-      const { billId, status } = req.body;
+    const { billId, status } = req.body;
 
-      // Update the status in the 'bill' table
-      await pool.query('UPDATE bill SET status = $1 WHERE id = $2', [status, billId]);
+    // Update the status in the 'bill' table
+    await pool.query('UPDATE bill SET status = $1 WHERE id = $2', [status, billId]);
 
-      res.status(200).json({ success: true, message: 'Bill status updated successfully' });
+    res.status(200).json({ success: true, message: 'Bill status updated successfully' });
   } catch (error) {
-      console.error('Error updating bill status:', error);
-      res.status(500).json({ success: false, message: 'Internal Server Error' });
+    console.error('Error updating bill status:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
 
@@ -267,6 +267,35 @@ app.post('/admin', async (req, res) => {
     res.status(500).json({ message: 'An error occurred' });
   }
 });
+
+// handle product from admin site
+// API endpoint to delete a product
+app.delete('/api/products/:productId', async (req, res) => {
+  const productId = req.params.productId;
+
+  try {
+    const result = await pool.query('DELETE FROM laptops WHERE id = $1', [productId]);
+    res.status(200).json({ message: 'Product deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting product:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// API endpoint to modify quantity
+app.put('/api/products/:productId', async (req, res) => {
+  const productId = req.params.productId;
+  const newQuantity = req.body.available;
+
+  try {
+    const result = await pool.query('UPDATE laptops SET available = $1 WHERE id = $2', [newQuantity, productId]);
+    res.status(200).json({ message: 'Quantity updated successfully' });
+  } catch (error) {
+    console.error('Error updating quantity:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
 // Format the fetched data into the structure used in productdetail.js
 async function formatDataForProductDetail() {
   const laptopsData = await fetchLaptopsData();
