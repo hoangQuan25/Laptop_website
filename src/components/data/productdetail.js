@@ -1,5 +1,15 @@
 const Productdetail = [
   {
+    "id": 2,
+    "Title": "MSI GF63 Thin 11SC 664VN",
+    "Cat": "Gaming",
+    "Brand": "MSI",
+    "Price": 14900000,
+    "Img": "./img/id2.png",
+    "Describe": "MSI GF63 Thin is proof you do not have to spend four figures to get a gaming laptop. In fact, there are quite a few options if you are willing to spend around $1,000. But for just $599, the base model of the GF63 (the 11SC-693) we’re reviewing has a peppy Intel Core i5 H-class processor and Nvidia GeForce GTX 1650 graphics, a big step up from the usual low-wattage chips and integrated graphics common around this price point.",
+    "Available": 2
+  },
+  {
     "id": 1,
     "Title": "ASUS TUF Gaming F15",
     "Cat": "Gaming",
@@ -48,16 +58,6 @@ const Productdetail = [
     "Img": "./img/id7.png",
     "Describe": "With an impressively sturdy construction and satisfactory performance, this laptop challenges the stereotype that budget options are subpar. Granted, it is not flawless and has a few hiccups, but if you are on a tight budget, the Asus Vivobook Go 14 is a compelling choice and stands out as one of the better budget laptops available in the market.",
     "Available": 8
-  },
-  {
-    "id": 2,
-    "Title": "MSI GF63 Thin 11SC 664VN",
-    "Cat": "Gaming",
-    "Brand": "MSI",
-    "Price": 14900000,
-    "Img": "./img/id2.png",
-    "Describe": "MSI GF63 Thin is proof you do not have to spend four figures to get a gaming laptop. In fact, there are quite a few options if you are willing to spend around $1,000. But for just $599, the base model of the GF63 (the 11SC-693) we’re reviewing has a peppy Intel Core i5 H-class processor and Nvidia GeForce GTX 1650 graphics, a big step up from the usual low-wattage chips and integrated graphics common around this price point.",
-    "Available": 4
   },
   {
     "id": 10,
@@ -167,7 +167,7 @@ const Productdetail = [
     "Price": 11900000,
     "Img": "./img/id17.jpg",
     "Describe": "Upgrade your computing experience with the HP 240 G8, a powerhouse of performance and reliability. Engineered with the Intel Core i5-1135G7 processor, this laptop takes productivity to new heights. From swift multitasking to resource-demanding tasks, the i5-1135G7 ensures a responsive and efficient computing experience.",
-    "Available": 9
+    "Available": 10
   }
 ];
 

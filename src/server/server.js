@@ -72,6 +72,8 @@ app.post('/cart', async (req, res) => {
 
     // Insert into 'bill_detail' table for each product in the cart
     for (const cartItem of cart) {
+
+      // update bill_detail
       await pool.query('INSERT INTO bill_detail (bill_id, product_id, quantity) VALUES ($1, $2, $3)', [billId, cartItem.id, cartItem.qty]);
     }
 
@@ -147,10 +149,11 @@ app.get('/admin', async (req, res) => {
 
     // Query for total revenue of the month
     const revenueResult = await pool.query(`
-      SELECT SUM(totalprice) AS total_revenue
-      FROM bill
-      WHERE EXTRACT(YEAR FROM date) = EXTRACT(YEAR FROM CURRENT_DATE)
-        AND EXTRACT(MONTH FROM date) = EXTRACT(MONTH FROM CURRENT_DATE)
+    SELECT SUM(totalprice) AS total_revenue
+    FROM bill
+    WHERE EXTRACT(YEAR FROM date) = EXTRACT(YEAR FROM CURRENT_DATE)
+      AND EXTRACT(MONTH FROM date) = EXTRACT(MONTH FROM CURRENT_DATE)
+      AND status = 1;    
     `);
 
     // Query for the number of products in laptops
@@ -239,6 +242,21 @@ app.post('/approveBill', async (req, res) => {
     // Update the status in the 'bill' table
     await pool.query('UPDATE bill SET status = $1 WHERE id = $2', [status, billId]);
 
+    // status = 1, update the quantity in stock
+    if (status === 1) {
+      const billDetails = await pool.query(
+        'SELECT product_id, quantity FROM bill_detail WHERE bill_id = $1',
+        [billId]
+      );
+
+      for (const detail of billDetails.rows) {
+        await pool.query(
+          'UPDATE laptops SET available = available - $1 WHERE id = $2',
+          [detail.quantity, detail.product_id]
+        );
+      }
+    }
+    
     res.status(200).json({ success: true, message: 'Bill status updated successfully' });
   } catch (error) {
     console.error('Error updating bill status:', error);
