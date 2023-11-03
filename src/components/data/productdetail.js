@@ -1,5 +1,15 @@
 const Productdetail = [
   {
+    "id": 16,
+    "Title": "MacBook Air 15 inch M2 2023",
+    "Cat": "Highend",
+    "Brand": "Macbook",
+    "Price": 36490000,
+    "Img": "./img/id16.png",
+    "Describe": "The Apple MacBook Air 15 is great for school use. Thanks to its thin and light design, it feels incredibly well-built and very portable. It has a sharp, bright display, a comfortable keyboard, and a large, responsive touchpad. Its M2 SoC can handle general productivity tasks and more demanding workloads like photo and video editing. The battery lasts about eight hours of light use, so depending on your usage, you may have to plug it in for a quick charge to get through the day.",
+    "Available": 5
+  },
+  {
     "id": 2,
     "Title": "MSI GF63 Thin 11SC 664VN",
     "Cat": "Gaming",
@@ -7,7 +17,17 @@ const Productdetail = [
     "Price": 14900000,
     "Img": "./img/id2.png",
     "Describe": "MSI GF63 Thin is proof you do not have to spend four figures to get a gaming laptop. In fact, there are quite a few options if you are willing to spend around $1,000. But for just $599, the base model of the GF63 (the 11SC-693) we’re reviewing has a peppy Intel Core i5 H-class processor and Nvidia GeForce GTX 1650 graphics, a big step up from the usual low-wattage chips and integrated graphics common around this price point.",
-    "Available": 2
+    "Available": 10
+  },
+  {
+    "id": 6,
+    "Title": "Lenovo IdeaPad 3",
+    "Cat": "Office",
+    "Brand": "Lenovo",
+    "Price": 13490000,
+    "Img": "./img/id6.png",
+    "Describe": "The Lenovo Ideapad 3 is a budget-friendly laptop series designed for everyday use, offering a balance of essential features. With options for various display sizes, Intel or AMD processors, and configurations with up to 8GB of RAM, the Ideapad 3 provides reliable performance for basic computing tasks at an affordable price point.",
+    "Available": 5
   },
   {
     "id": 1,
@@ -28,26 +48,6 @@ const Productdetail = [
     "Img": "./img/id5.png",
     "Describe": "The Lenovo Ideapad Slim 5 is a stylish and lightweight laptop series, featuring a vibrant Full HD display and powered by either Intel Core i5 or AMD Ryzen 5 processors for efficient everyday computing. With configurations offering up to 16GB of RAM and fast SSD storage, the Ideapad Slim 5 delivers a seamless blend of performance and portability for users on the go.",
     "Available": 6
-  },
-  {
-    "id": 6,
-    "Title": "Lenovo IdeaPad 3",
-    "Cat": "Office",
-    "Brand": "Lenovo",
-    "Price": 13490000,
-    "Img": "./img/id6.png",
-    "Describe": "The Lenovo Ideapad 3 is a budget-friendly laptop series designed for everyday use, offering a balance of essential features. With options for various display sizes, Intel or AMD processors, and configurations with up to 8GB of RAM, the Ideapad 3 provides reliable performance for basic computing tasks at an affordable price point.",
-    "Available": 2
-  },
-  {
-    "id": 16,
-    "Title": "MacBook Air 15 inch M2 2023",
-    "Cat": "Highend",
-    "Brand": "Macbook",
-    "Price": 36490000,
-    "Img": "./img/id16.png",
-    "Describe": "The Apple MacBook Air 15 is great for school use. Thanks to its thin and light design, it feels incredibly well-built and very portable. It has a sharp, bright display, a comfortable keyboard, and a large, responsive touchpad. Its M2 SoC can handle general productivity tasks and more demanding workloads like photo and video editing. The battery lasts about eight hours of light use, so depending on your usage, you may have to plug it in for a quick charge to get through the day.",
-    "Available": 3
   },
   {
     "id": 7,

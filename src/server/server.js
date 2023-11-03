@@ -304,6 +304,7 @@ app.delete('/api/products/:productId', async (req, res) => {
 app.put('/api/products/:productId', async (req, res) => {
   const productId = req.params.productId;
   const newQuantity = req.body.available;
+  console.log(newQuantity);
 
   try {
     const result = await pool.query('UPDATE laptops SET available = $1 WHERE id = $2', [newQuantity, productId]);
