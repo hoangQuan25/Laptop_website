@@ -12,6 +12,12 @@ dotenv.config();
 // Middleware to parse JSON data
 app.use(bodyParser.json());
 
+// connect to database
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+})
+
+
 // add messages to server
 app.post('/messages', async (req, res) => {
   try {
@@ -29,16 +35,6 @@ app.post('/messages', async (req, res) => {
     console.error('Error inserting message into database:', error);
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
-});
-
-
-// connect to database
-const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'laptop_website',
-  password: 'sinhvien',
-  port: 5432, // Change the port if needed
 });
 
 // Fetch data from the laptops table
