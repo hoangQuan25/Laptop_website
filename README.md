@@ -17,7 +17,7 @@ After cloning this repository to your computer, navigate to the cloned directory
 
 After ensuring that the website is running on localhost:3000, open another terminal and navigate to the server directory, and type:
 
-`node server.js`
+`nodemon server.js`
 
 ### Note
 
@@ -37,7 +37,7 @@ Node.jsがコンピュータにインストールされていることを確認�
 
 localhost:3000でウェブサイトが実行されていることを確認したら、別のターミナルを開いてサーバーディレクトリに移動し、次のコマンドを入力してください：
 
-`node server.js`
+`nodemon server.js`
 
 ## 注意
 
