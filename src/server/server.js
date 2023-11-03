@@ -6,7 +6,7 @@ const stripe = require('stripe');
 const dotenv = require('dotenv');
 
 const app = express();
-const port = process.env.PORT || 3001;
+const port = 3001;
 dotenv.config();
 
 // Middleware to parse JSON data
@@ -14,8 +14,12 @@ app.use(bodyParser.json());
 
 // connect to database
 const pool = new Pool({
-  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-})
+  user: 'postgres',
+  host: 'localhost',
+  database: 'laptop_website',
+  password: 'sinhvien',
+  port: 5432, // Change the port if needed
+});
 
 
 // add messages to server
